@@ -216,9 +216,10 @@ button:active {
     body {
         overflow: hidden;
     }
-    canvas{
-        width: 100vw;
-        height: 79vh;
+    canvas {
+        width: 90vw; /* Reduziere die Breite auf 90% der Viewport-Breite */
+        height: 80vh; /* Reduziere die Höhe auf 80% der Viewport-Höhe */
+        margin: 0 auto 22px; /* Zentriere horizontal und füge unten 22px Abstand hinzu */
     }
 
     .alert{
