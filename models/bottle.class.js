@@ -1,4 +1,5 @@
-class Bottle extends MovableObject {
+class Bottle extends MovableObject{
+
     height = 60;
     width = 60;
     y = 365;
@@ -9,29 +10,30 @@ class Bottle extends MovableObject {
         bottom: 10,
     };
 
+
     IMAGES_ONGROUND = [
         'img/6_salsa_bottle/1_salsa_bottle_on_ground.png',
         'img/6_salsa_bottle/2_salsa_bottle_on_ground.png'
-    ];
+    ]
 
-    constructor() {
+    constructor(){
         super().loadImage(this.IMAGES_ONGROUND[0]);
         this.loadImages(this.IMAGES_ONGROUND);
-        this.x = Math.random() * 2000;
+        this.x = Math.random()* 2000;
         this.animate();
     }
 
     /**
-     * Holt das aktuelle Bild für die Animation
+     * gets the current picture for playing the animation
      */
-    animate() {
-        setStopableInterval(this.standingBottle, 1100);
+    animate(){
+        setStopableInterval(this.standingBottle, 500)
     }
 
     /**
-     * Ruft die Funktion "playAnimation" auf, um die Bilder für die Animation zu ändern
+     * calls the function "playAnimation" for changen the images for playing the animation
      */
     standingBottle = () => {
-        this.playAnimation(this.IMAGES_ONGROUND);
+            this.playAnimation(this.IMAGES_ONGROUND)
     }
 }
