@@ -96,16 +96,14 @@ class Character extends MovableObject {
         this.pushCharacterSoundsInArray()
     }
 
-    /**
-     * Setzt den Wert der Variablen "lastMove" 
-     */
+   
     getLastMove() {
         this.lastMove = new Date().getTime();
     }
 
     /**
-     * Berechnet den Wert für "timepassed" 
-     * @returns entsprechend true oder false
+     * 
+     * @returns 
      */
     checklastMove() {
         let timepassed = new Date().getTime() - this.lastMove;
@@ -114,8 +112,8 @@ class Character extends MovableObject {
     }
 
     /**
-     * Überprüft, ob der Charakter schläft
-     * @returns true, wenn vergangene Zeit größer als 4 Sekunden ist, sonst false
+     * 
+     * @returns 
      */
     checkSleeping() {
         let timepassed = new Date().getTime() - this.lastMove;
@@ -123,17 +121,13 @@ class Character extends MovableObject {
         return timepassed > 4;
     }
 
-    /**
-     * Ruft die Intervallfunktion auf
-     */
+   
     animate() {
         setStopableInterval(this.walking, 1000 / 60);
         setStopableInterval(this.walkAnimation, 150);
     }
 
-    /**
-     * Überprüft die Bedingung und ruft die richtige Funktion zum Bewegen des Charakters auf
-     */
+   
     walking = () => {
         this.walking_sound.pause();
 
@@ -150,9 +144,7 @@ class Character extends MovableObject {
         this.world.camera_x = -this.x + 100;
     }
 
-    /**
-     * Überprüft die Bedingung und ruft die richtige Funktion zur Wiedergabe der richtigen Animation des Charakters auf
-     */
+   
     walkAnimation = () => {
         if (this.isHurt()) {
             this.playAnimation(this.IMAGES_HURT);
@@ -170,9 +162,7 @@ class Character extends MovableObject {
         }
     }
 
-    /**
-     * Bewegt den Charakter nach rechts
-     */
+    
     moveCharacterRight() {
         this.moveRight();
         this.otherDirection = false;
@@ -180,16 +170,12 @@ class Character extends MovableObject {
         this.walking_sound.play();
     }
 
-    /**
-     * Animiert den Sprung des Charakters
-     */
+   
     jumpAnimation() {
         this.playAnimation(this.IMAGES_JUMPING);
     }
 
-    /**
-     * Bewegt den Charakter nach links
-     */
+    
     moveCharacterLeft() {
         this.moveleft();
         this.otherDirection = true;
@@ -198,22 +184,20 @@ class Character extends MovableObject {
     }
 
     /**
-     * @returns das rechte Ende der Welt
+     * @returns 
      */
     worldRightEnd() {
         return this.x < this.world.level.level_end_x;
     }
 
     /**
-     * @returns das linke Ende der Welt
+     * @returns 
      */
     worldLeftEnd() {
         return this.x > 0;
     }
 
-    /**
-     * Fügt den aktuellen Sound dem Sounds-Array hinzu
-     */
+   
     pushCharacterSoundsInArray() {
         if (this.soundsAreNew) {
             sounds.push(this.walking_sound);

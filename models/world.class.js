@@ -40,9 +40,8 @@ class World {
     setStopableInterval(this.checkBottleHit, 100);
   }
 
-  /**
-   * Überprüft, ob das Spiel startbereit ist
-   */
+  // Checks if the game is ready to start
+
   checkForGameStart() {
     if (this.gamestart) {
       initLevel();
@@ -52,9 +51,8 @@ class World {
       this.pushSoundInArray();
     }
   }
-  /**
-   * Fügt den aktuellen Sound dem Sounds-Array hinzu
-   */
+  // Adds the current sound to the Sounds array
+
   pushSoundInArray() {
     if (this.soundsAreNew) {
       sounds.push(this.collectBottle_sound);
@@ -65,25 +63,21 @@ class World {
     }
   }
 
-  /**
-   * Überprüft, ob die Funktion 'run' ausgeführt werden kann
-   */
+  // Checks if the 'run' function can be executed
+
   checkForRunning = () => {
     if (this.gamestart) {
       this.run();
     }
   };
 
-  /**
-   * Legt den Punkt der Welt fest, der für den Charakter verwendet wird
-   */
+  // Sets the point in the world that is used for the character
+
   setWorld() {
     this.character.world = this;
   }
 
-  /**
-   * Überprüft alle Bedingungen, die für das Spiel verwendet werden
-   */
+  // Checks all conditions used for the game
   run() {
     this.checkCollision();
     this.collectCoins();
@@ -98,9 +92,8 @@ class World {
     this.checkIfCharacterIsBehindBoss();
     this.checkBottleHit();
   }
-  /**
-   * Überprüft, ob der Charakter auf den Feinden gesprungen ist
-   */
+  // Checks if the character has jumped on the enemies
+
   jumpOnEnemies() {
     for (let i = 0; i < this.level.enemies.length - 1; i++) {
       const enemy = this.level.enemies[i];
@@ -201,17 +194,17 @@ class World {
     ) {
       this.endbossDied = true;
 
-      // Hier würde Ihre Logik stehen, um die Endboss-Todesanimation zu starten
-      // Nachdem die Animation gestartet (oder beendet) wurde:
+      // Here would stand your logic to start the end boss death animation
+      // After the animation has started (or finished):
+
       setTimeout(() => {
         showEndBossDefeatedOverlay();
-      }, 2000); // Warte 2 Sekunden nach der Animation, dann zeige das Overlay
+      }, 2000);
     }
   }
 
-  /**
-   * Überprüft, ob eine Flasche geworfen wird
-   */
+  // Checks if a bottle is being thrown
+
   checkThrowObjects() {
     if (this.keyboard.D && this.useableBottle != 0) {
       this.bottle = new ThrowableObject(
@@ -229,9 +222,8 @@ class World {
     }
   }
 
-  /**
-   * Überprüft die Kollision des Charakters mit einem Feind
-   */
+  // Checks the collision of the character with an enemy
+
   checkCollision() {
     this.level.enemies.forEach((enemy) => {
       if (
@@ -245,9 +237,8 @@ class World {
     });
   }
 
-  /**
-   * Überprüft, ob der Charakter Münzen gesammelt hat
-   */
+  // Checks if the character has collected coins
+
   collectCoins() {
     for (let i = 0; i < this.level.coins.length; i++) {
       const coin = this.level.coins[i];
@@ -261,9 +252,8 @@ class World {
     }
   }
 
-  /**
-   * Überprüft, ob der Charakter Flaschen gesammelt hat
-   */
+  // Checks if the character has collected bottles
+
   collectBottles() {
     for (let i = 0; i < this.level.bottles.length; i++) {
       const collectedbottle = this.level.bottles[i];
@@ -277,9 +267,8 @@ class World {
     }
   }
 
-  /**
-   * Zeichnet die Welt
-   */
+  // Draws the world
+
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.ctx.translate(this.camera_x, 0);
@@ -301,9 +290,8 @@ class World {
     });
   }
 
-  /**
-   * Fügt Objekte zur Karte hinzu
-   */
+  // Adds objects to the map
+
   addAllObjectsToMap() {
     this.ctx.translate(this.camera_x, 0);
     this.addObjectsToMap(this.level.backgroundObjects);
@@ -315,9 +303,8 @@ class World {
     this.addObjectsToMap(this.throwableObject);
   }
 
-  /**
-   * Fügt die Statusleisten zur Karte hinzu
-   */
+  // Adds the status bars to the map
+
   addStatusbarsToMap() {
     this.addToMap(this.statusBar);
     this.addToMap(this.statusBarCoin);
@@ -326,14 +313,12 @@ class World {
     this.addToMap(this.healthImg);
   }
 
-  /**
-   * Aktion, die ausgeführt wird, wenn das Spiel verloren geht
-   */
+  // Action executed when the game is lost
+
   youLostTheGame() {
     if (!this.gameEnded && this.characterDied) {
       this.gameEnded = true;
 
-      // Bereinige den Canvas und zeige den "Oh no, you lost!"-Bildschirm sofort
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
       const lostScreen = new Image();
       lostScreen.onload = () => {
@@ -348,23 +333,20 @@ class World {
       lostScreen.src =
         "img/9_intro_outro_screens/game_over/oh no you lost!.png";
 
-      // Verwende setTimeout, um eine Verzögerung einzuführen, bevor das Spiel neu gestartet wird
       setTimeout(() => {
-        stopGame(); // Stoppe alle Spiel-Intervalle und Logik, wenn überhaupt vorhanden
-        showRestartBtn(); // Zeige einen Button, um das Spiel neu zu starten
-        // Oder lade die Seite neu, wenn du sofort neustarten möchtest: location.reload();
-      }, 5000); // Warte 5 Sekunden, bevor die Logik zum Neustart ausgeführt wird
+        stopGame();
+        showRestartBtn();
+      }, 5000);
     }
   }
 
   showEndbossDeathAnimation() {
-    // Erstelle ein neues Image-Objekt für die Endboss-Dead-Animation
+    // Create a new Image object for the end boss death animation
     let endbossDeadImage = new Image();
     endbossDeadImage.src =
       "img/4_enemie_boss_chicken/5_dead/Muestra_herida_y_muerte.gif"; // Pfad zum Endboss-Dead-GIF
 
     endbossDeadImage.onload = () => {
-      // Zeichne das Endboss-Dead-GIF auf dem Canvas
       this.ctx.drawImage(
         endbossDeadImage,
         this.level.enemies[this.level.enemies.length - 1].x,
@@ -373,9 +355,8 @@ class World {
     };
   }
 
-  /**
-   * Aktion, die ausgeführt wird, wenn das Spiel gewonnen wird
-   */
+  // Action executed when the game is won
+
   youWonTheGame(animationFinished = false) {
     if (animationFinished) {
       this.endscreen = new BackgroundObject(
@@ -393,28 +374,24 @@ class World {
   }
 
   finalizeGameWin() {
-    // Unterbrechen Sie die reguläre Zeichenschleife, um zu verhindern, dass der Endscreen sofort überschrieben wird
+    // Interrupt the regular drawing loop to prevent the end screen from being immediately overwritten
     cancelAnimationFrame(this.animationFrameId);
 
-    // Warte, bis die Endboss-Dead-Animation abgeschlossen ist
     let endbossDeadImage = new Image();
     endbossDeadImage.src =
       "img/4_enemie_boss_chicken/5_dead/Muestra_herida_y_muerte.gif";
 
     endbossDeadImage.onload = () => {
-      // Stellen Sie sicher, dass alle Transformationen zurückgesetzt werden
       this.ctx.setTransform(1, 0, 0, 1, 0, 0);
-      // Löschen Sie den gesamten Canvas
+
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-      // Zeichne das Endboss-Dead-GIF auf dem Canvas
       this.ctx.drawImage(
         endbossDeadImage,
         this.level.enemies[this.level.enemies.length - 1].x,
         this.level.enemies[this.level.enemies.length - 1].y
       );
 
-      // Nachdem das GIF geladen und gezeichnet wurde, warte 2 Sekunden, dann zeige den Endscreen an
       setTimeout(() => {
         this.showGameWinScreen();
       }, 2000);
@@ -422,7 +399,7 @@ class World {
   }
 
   showGameWinScreen() {
-    // Markiere das Spiel als beendet, um zu verhindern, dass das "You Lost"-Overlay angezeigt wird
+    // Mark the game as ended to prevent the "You Lost" overlay from being displayed
     this.gameEnded = true;
 
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);

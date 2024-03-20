@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" translate="no">
   <head>
-    <!-- Metadaten -->
+    <!-- Metadata -->
     <meta charset="UTF-8" />
     <meta name="google" content="notranslate" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -22,7 +22,7 @@
     />
     <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css" />
-    <!-- JavaScript-Dateien -->
+    <!-- JavaScript Files -->
     <script src="models/drawable-objects.class.js"></script>
     <script src="models/movable-objects.class.js"></script>
     <script src="models/status-bar.class.js"></script>
@@ -48,24 +48,24 @@
   </head>
 
   <body onload="init()">
-    <!-- Überschrift -->
+    <!-- Heading -->
     <h1>El pollo loco</h1>
 
     <!-- Canvas -->
     <div class="fullscreen" id="fullscreen">
       <canvas id="canvas" width="720px" height="480px"></canvas>
 
-      <!-- Alert-Bereich -->
+      <!-- Alert Area -->
       <div class="alert">
-        <h1>please Turn your Device</h1>
+        <h1>Please turn your device</h1>
       </div>
 
-      <!-- Absolute Positionierung für Bedienelemente -->
+      <!-- Absolute positioning for control elements -->
       <div class="absolute" id="absolute">
-        <!-- Bedienelemente -->
+        <!-- Controls -->
         <div class="gameStartBtn">
           <div>
-            <!-- Soundsteuerung -->
+            <!-- Sound control -->
             <img
               onclick="steerSound()"
               id="soundON"
@@ -74,14 +74,14 @@
             />
           </div>
           <div class="control">
-            <!-- Bewegungstasten -->
+            <!-- Movement keys -->
             <div id="btnLeft" class="mobileKey" onclick="moveOnMobile()">
               <img src="img/9_intro_outro_screens/arrow-left.png" />
             </div>
             <div id="btnJump" class="mobileKey">
               <img src="img/9_intro_outro_screens/arrow-up.png" />
             </div>
-            <!-- Start- und Neustarttasten -->
+            <!-- Start and restart buttons -->
             <button class="startBtn" id="startBtn" onclick="startTheGame()">
               START
             </button>
@@ -90,25 +90,24 @@
               id="restartBtn"
               onclick="restartTheGame()"
             >
-              Nochmal
+              Try Again
             </button>
-            <!-- Flaschenwurf-Taste -->
+            <!-- Bottle throw button -->
             <div id="throwBottle" class="mobileKey">
               <img src="img/9_intro_outro_screens/bottle.png" />
             </div>
-            <!-- Bewegungstaste nach rechts -->
+            <!-- Right movement button -->
             <div id="btnRight" class="mobileKey">
               <img src="img/9_intro_outro_screens/arrow-right.png" />
             </div>
           </div>
           <div>
             <div class="emptyDiv"></div>
-            <!-- Vollbildmodus-Schaltfläche -->
+            <!-- Fullscreen mode button -->
             <img
               onclick="becomeFullscreen()"
               class="fullscreenIcon"
               id="fullscreenIcon"
-              class="gameIcons"
               src="img/9_intro_outro_screens/fullscreen.svg"
             />
           </div>

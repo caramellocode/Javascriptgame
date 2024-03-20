@@ -10,7 +10,7 @@ body {
   background-image: url("img/5_background/layers/1_first_layer/bg.jpg");
   font-family: "taco", Arial, sans-serif;
   margin: 0px;
-  background-size: cover; /* Hintergrundbild an Bildschirm anpassen */
+  background-size: cover; 
   background-repeat: no-repeat;
   height: 100vh;
 }
@@ -19,18 +19,18 @@ body {
   position: fixed;
   top: 50;
   left: 40;
-  width: 100%; /* Verwenden Sie 100% des Viewports */
-  height: 100%; /* Verwenden Sie 100% der Viewport-Höhe */
-  background-color: rgba(0, 0, 0, 0.5); /* Halbtransparenter Hintergrund */
+  width: 100%; 
+  height: 100%; 
+  background-color: rgba(0, 0, 0, 0.5); 
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000; /* Stellen Sie sicher, dass das Overlay über anderen Elementen liegt */
+  z-index: 1000; 
 }
 
 .overlay-image {
-  max-width: 100%; /* Bild nimmt maximal mögliche Breite */
-  max-height: 100%; /* Bild nimmt maximal mögliche Höhe */
+  max-width: 100%; 
+  max-height: 100%; 
   margin-top: -214px;
 }
 
@@ -278,17 +278,6 @@ button:active {
     position: absolute;
     margin-top: 273px;
    }
-
-   .startBtn {
-    padding: 15px 30px;
-    font-size: 20px;
-    cursor: pointer;
-    background-color: #3e2f08;
-    color: white;
-    border: 8px solid brown;
-    border-radius: 25px;
-    margin-left: -66px;
-}
 }
 
 @media only screen and (max-height: 480px) {
@@ -296,9 +285,9 @@ button:active {
     overflow: hidden;
   }
   canvas {
-    width: 100vw; /* Reduziere die Breite auf 90% der Viewport-Breite */
-    height: 100vh; /* Reduziere die Höhe auf 80% der Viewport-Höhe */
-    margin: 0 auto 1px; /* Zentriere horizontal und füge unten 22px Abstand hinzu */
+    width: 100vw; 
+    height: 100vh; 
+    margin: 0 auto 1px; 
   }
 
   .alert {

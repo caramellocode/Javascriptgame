@@ -11,7 +11,7 @@ let i = 1;
 let soundsAreNew = true;
 
 /**
- * loads the page
+ * Loads the page.
  */
 function init() {
   canvas = document.getElementById("canvas");
@@ -19,7 +19,7 @@ function init() {
 }
 
 /**
- * starts the game on click
+ * Starts the game on click.
  */
 function startTheGame() {
   gameStart();
@@ -33,36 +33,36 @@ function startTheGame() {
 
 function showEndBossDefeatedOverlay() {
   const overlay = document.createElement("div");
-  overlay.className = "overlay"; // Zuweisen der CSS-Klasse zum Overlay
+  overlay.className = "overlay"; // Assigns the CSS class to the overlay.
 
   const image = new Image();
-  image.src = "img/9_intro_outro_screens/game_over/winner.jpg"; // Pfad zu Ihrem Overlay-Bild
-  image.className = "overlay-image"; // Zuweisen der CSS-Klasse zum Bild
+  image.src = "img/9_intro_outro_screens/game_over/winner.jpg"; // Path to your overlay image.
+  image.className = "overlay-image"; // Assigns the CSS class to the image.
 
-  // Button erstellen
+  // Create button.
   const button = document.createElement("button");
-  button.innerText = "Nochmal versuchen";
-  button.className = "retry-button"; // Stellen Sie sicher, dass Sie Styles für diese Klasse in Ihrer CSS haben
+  button.innerText = "Try again";
+  button.className = "retry-button"; // Ensure you have styles for this class in your CSS.
   button.style.position = "absolute";
   button.style.left = "50%";
-  button.style.transform = "translateX(-50%)"; // Zentriert den Button horizontal
-  button.style.bottom = "20px"; // Abstand vom unteren Rand des Overlays
+  button.style.transform = "translateX(-50%)"; // Centers the button horizontally.
+  button.style.bottom = "20px"; // Distance from the bottom of the overlay.
 
-  // Event-Listener für den Button
+  // Event listener for the button.
   button.addEventListener("click", function () {
-    location.reload(); // Seite neu laden
+    location.reload(); // Reloads the page.
   });
 
   overlay.appendChild(image);
-  overlay.appendChild(button); // Button zum Overlay hinzufügen
+  overlay.appendChild(button); // Adds the button to the overlay.
   document.body.appendChild(overlay);
 
-  // Der Event-Listener für das Klicken auf das Overlay, um es zu entfernen, wurde entfernt.
-  // Das Overlay bleibt bestehen, bis der Button geklickt wird.
+  // The event listener for clicking on the overlay to remove it was removed.
+  // The overlay remains until the button is clicked.
 }
 
 /**
- * pushs the current sound into the sounds Array
+ * Pushes the current sound into the sounds array.
  */
 function pushGameSoundInArray() {
   if (soundsAreNew) {
@@ -72,7 +72,7 @@ function pushGameSoundInArray() {
 }
 
 /**
- * is setting the right booleans for gamestart
+ * Sets the correct booleans for game start.
  */
 function gameStart() {
   world.gamestart = true;
@@ -81,7 +81,7 @@ function gameStart() {
 }
 
 /**
- * hides the start button
+ * Hides the start button.
  */
 function hideButton() {
   document.getElementById("startBtn").style = "display: none;";
@@ -94,32 +94,28 @@ function hideIconFullscreen() {
 }
 
 /**
- * steers the sound for the game
+ * Steers the sound for the game.
  */
 function steerSound() {
   if (soundIsRunning) {
-    //game_song.pause();
     sounds.forEach((sound) => {
       sound.muted = true;
     });
     soundIsRunning = false;
-    document.getElementById("soundON").src =
-      "img/9_intro_outro_screens/soundOFF.png";
+    document.getElementById("soundON").src = "img/9_intro_outro_screens/soundOFF.png";
   } else {
-    //game_song.play();
     sounds.forEach((sound) => {
       sound.muted = false;
     });
     soundIsRunning = true;
-    document.getElementById("soundON").src =
-      "img/9_intro_outro_screens/soundOn.png";
+    document.getElementById("soundON").src = "img/9_intro_outro_screens/soundOn.png";
   }
 }
 
 /**
- * sets intervall for current function and pushs the id from it into the array "intervalIds"
- * @param {function} fn
- * @param {Integer} time
+ * Sets an interval for a function and pushes the interval's ID into the "intervalIds" array.
+ * @param {Function} fn - The function to be executed.
+ * @param {Number} time - The interval time in milliseconds.
  */
 function setStopableInterval(fn, time) {
   let id = setInterval(fn, time);
@@ -127,7 +123,7 @@ function setStopableInterval(fn, time) {
 }
 
 /**
- * stops the game by clearing all intervalls from the array "intervalIds"
+ * Stops the game by clearing all intervals in the "intervalIds" array.
  */
 function stopGame() {
   if (!world.gameEnded) {
@@ -137,7 +133,7 @@ function stopGame() {
 }
 
 /**
- * if the game is stopped, this function starts a new match
+ * If the game is stopped, this function starts a new match.
  */
 function restartTheGame() {
   gameStart();
@@ -147,7 +143,7 @@ function restartTheGame() {
 }
 
 /**
- * shows the button for starting an new match
+ * Shows the button for starting a new match.
  */
 function showRestartBtn() {
   document.getElementById("restartBtn").style = "display: flex;";
