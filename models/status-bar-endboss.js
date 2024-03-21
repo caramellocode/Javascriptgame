@@ -1,29 +1,28 @@
 class StatusbarEndboss extends DrawableObject {
+  // Array of image paths for the statusbar endboss
 
+  IMAGES = [
+    "img/7_statusbars/1_statusbar/2_statusbar_health/green/0.png",
+    "img/7_statusbars/1_statusbar/2_statusbar_health/green/20.png",
+    "img/7_statusbars/1_statusbar/2_statusbar_health/green/40.png",
+    "img/7_statusbars/1_statusbar/2_statusbar_health/green/60.png",
+    "img/7_statusbars/1_statusbar/2_statusbar_health/green/80.png",
+    "img/7_statusbars/1_statusbar/2_statusbar_health/green/100.png",
+  ];
 
-    IMAGES = [
-        'img/7_statusbars/1_statusbar/2_statusbar_health/green/0.png',
-        'img/7_statusbars/1_statusbar/2_statusbar_health/green/20.png',
-        'img/7_statusbars/1_statusbar/2_statusbar_health/green/40.png',
-        'img/7_statusbars/1_statusbar/2_statusbar_health/green/60.png',
-        'img/7_statusbars/1_statusbar/2_statusbar_health/green/80.png',
-        'img/7_statusbars/1_statusbar/2_statusbar_health/green/100.png'
-    ]
+  percentage = 100;
 
-    percentage = 100;
-
-
-
-    constructor(){
-        super().otherDirection = true;
-        this.loadImages(this.IMAGES);
-        this.x = 500;
-        this.y = 20;
-        this.width = 200;
-        this.height = 60;
-        this.setPercentage(100);
-    }
-
-
-
+  /**
+   * Initializes the StatusbarEndboss with health images, sets the direction,
+   * position, dimensions, and health percentage to full.
+   */
+  constructor() {
+    super().otherDirection = true;
+    this.loadImages(this.IMAGES);
+    this.x = 500;
+    this.y = 20;
+    this.width = 200;
+    this.height = 60;
+    this.setPercentage(100);
+  }
 }

@@ -8,6 +8,9 @@ class Keyboard{
     KeyF = false;
     ESC = false;
 
+    /**
+     * Initializes a Keyboard object to track the state (pressed or not pressed) of specified keys.
+     */
     constructor(){
 
     }

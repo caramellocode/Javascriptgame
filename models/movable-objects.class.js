@@ -14,7 +14,9 @@ class MovableObject extends DrawableObject {
     right: 0,
     bottom: 0,
   };
-
+  /**
+   * Applies gravity effect, causing the object to fall or jump based on its vertical speed and acceleration.
+   */
   applyGravity() {
     setInterval(() => {
       if (this.isAboveGround() || this.speedY > 0) {
@@ -25,8 +27,8 @@ class MovableObject extends DrawableObject {
   }
 
   /**
-   *
-   * @returns
+   * Determines if the object is above the ground level to decide if gravity should be applied.
+   * @returns {boolean} True if the object is above ground or a ThrowableObject, else false.
    */
   isAboveGround() {
     if (this instanceof ThrowableObject) {
@@ -35,18 +37,22 @@ class MovableObject extends DrawableObject {
       return this.y < 120;
     }
   }
-
+  /**
+   * Moves the object to the right by increasing its x-coordinate by the speed amount.
+   */
   moveRight() {
     this.x += this.speed;
   }
-
+  /**
+   * Moves the object to the left by decreasing its x-coordinate by the speed amount.
+   */
   moveleft() {
     this.x -= this.speed;
   }
 
   /**
-   *
-   * @param {array} imgArray
+   * Plays an animation by cycling through a given array of images.
+   * @param {array} imgArray - Array of image paths to animate.
    */
   playAnimation(imgArray) {
     let i = this.currentImage % imgArray.length;
@@ -54,11 +60,15 @@ class MovableObject extends DrawableObject {
     this.img = this.imageCache[path];
     this.currentImage++;
   }
-
+  /**
+   * Initiates a jump by setting the object's vertical speed (speedY) to a positive value.
+   */
   jump() {
     this.speedY = 30;
   }
-
+  /**
+   * Reduces the object's energy by a fixed amount when hit, and updates the time of the last hit.
+   */
   hit() {
     this.energy -= 3;
     if (this.energy < 0) {
@@ -69,8 +79,8 @@ class MovableObject extends DrawableObject {
   }
 
   /**
-   *
-   * @returns
+   * Checks if the object has been hit recently based on the time since the last hit.
+   * @returns {boolean} True if the object was hit less than 0.6 seconds ago, else false.
    */
   isHurt() {
     let timepassed = new Date().getTime() - this.lastHit;
@@ -79,8 +89,8 @@ class MovableObject extends DrawableObject {
   }
 
   /**
-   *
-   * @returns
+   * Checks if the object has not been hit recently.
+   * @returns {boolean} True if more than 0.6 seconds have passed since the last hit, else false.
    */
   isNotHurt() {
     let timepassed = new Date().getTime() - this.lastHit;
@@ -89,8 +99,8 @@ class MovableObject extends DrawableObject {
   }
 
   /**
-   *
-   * @returns
+   * Determines if the object has jumped by checking its y-coordinate.
+   * @returns {boolean} True if the object has jumped, else false.
    */
   isJumped() {
     if (this.y <= 10) {
@@ -98,7 +108,9 @@ class MovableObject extends DrawableObject {
     }
     return this.thisJumped;
   }
-
+  /**
+   * Resets the jumped status when the object reaches ground level again.
+   */
   onGroundAgain() {
     if (this.y >= 150) {
       this.thisJumped = false;
@@ -106,17 +118,17 @@ class MovableObject extends DrawableObject {
   }
 
   /**
-   *
-   * @returns true or false
+   * Checks if the object is dead based on its energy level.
+   * @returns {boolean} True if energy is 0, else false.
    */
   isDead() {
     return this.energy == 0;
   }
 
   /**
-   * Checks the collisions
-   * @param {object} mo
-   * @returns
+   * Determines if the object is colliding with another movable object.
+   * @param {MovableObject} mo - The other object to check collision with.
+   * @returns {boolean} True if colliding, else false.
    */
   isColliding(mo) {
     return (

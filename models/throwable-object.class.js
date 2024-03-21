@@ -1,63 +1,67 @@
-class ThrowableObject extends MovableObject{
+class ThrowableObject extends MovableObject {
+  height = 60;
+  width = 50;
 
+  IMAGES_FLYINGBOTTLE = [
+    // Array of image paths for the flying bottle
 
-    height = 60;
-    width = 50;
+    "img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png",
+    "img/6_salsa_bottle/bottle_rotation/2_bottle_rotation.png",
+    "img/6_salsa_bottle/bottle_rotation/3_bottle_rotation.png",
+    "img/6_salsa_bottle/bottle_rotation/4_bottle_rotation.png",
+  ];
 
+  IMAGES_SPLASH = [
+    // Array of image paths for the bottle splash
+    "img/6_salsa_bottle/bottle_rotation/bottle_splash/1_bottle_splash.png",
+    "img/6_salsa_bottle/bottle_rotation/bottle_splash/2_bottle_splash.png",
+    "img/6_salsa_bottle/bottle_rotation/bottle_splash/3_bottle_splash.png",
+    "img/6_salsa_bottle/bottle_rotation/bottle_splash/4_bottle_splash.png",
+    "img/6_salsa_bottle/bottle_rotation/bottle_splash/5_bottle_splash.png",
+    "img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png",
+    "img/6_salsa_bottle/bottle_rotation/bottle_splash/1_bottle_splash.png",
+    "img/6_salsa_bottle/bottle_rotation/bottle_splash/2_bottle_splash.png",
+    "img/6_salsa_bottle/bottle_rotation/bottle_splash/3_bottle_splash.png",
+    "img/6_salsa_bottle/bottle_rotation/bottle_splash/4_bottle_splash.png",
+    "img/6_salsa_bottle/bottle_rotation/bottle_splash/5_bottle_splash.png",
+    "img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png",
+    "img/6_salsa_bottle/bottle_rotation/bottle_splash/1_bottle_splash.png",
+    "img/6_salsa_bottle/bottle_rotation/bottle_splash/2_bottle_splash.png",
+    "img/6_salsa_bottle/bottle_rotation/bottle_splash/3_bottle_splash.png",
+    "img/6_salsa_bottle/bottle_rotation/bottle_splash/4_bottle_splash.png",
+    "img/6_salsa_bottle/bottle_rotation/bottle_splash/5_bottle_splash.png",
+    "img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png",
+  ];
 
-    IMAGES_FLYINGBOTTLE = [
-        'img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png',
-        'img/6_salsa_bottle/bottle_rotation/2_bottle_rotation.png',
-        'img/6_salsa_bottle/bottle_rotation/3_bottle_rotation.png',
-        'img/6_salsa_bottle/bottle_rotation/4_bottle_rotation.png',
-    ];
+  /**
+   * Initializes a ThrowableObject with images for flying and splashing states,
+   * sets its initial position, speed, and starts the throw animation if parameters are provided.
+   */
 
-    IMAGES_SPLASH = [
-        'img/6_salsa_bottle/bottle_rotation/bottle_splash/1_bottle_splash.png',
-        'img/6_salsa_bottle/bottle_rotation/bottle_splash/2_bottle_splash.png',
-        'img/6_salsa_bottle/bottle_rotation/bottle_splash/3_bottle_splash.png',
-        'img/6_salsa_bottle/bottle_rotation/bottle_splash/4_bottle_splash.png',
-        'img/6_salsa_bottle/bottle_rotation/bottle_splash/5_bottle_splash.png',
-        'img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png',
-        'img/6_salsa_bottle/bottle_rotation/bottle_splash/1_bottle_splash.png',
-        'img/6_salsa_bottle/bottle_rotation/bottle_splash/2_bottle_splash.png',
-        'img/6_salsa_bottle/bottle_rotation/bottle_splash/3_bottle_splash.png',
-        'img/6_salsa_bottle/bottle_rotation/bottle_splash/4_bottle_splash.png',
-        'img/6_salsa_bottle/bottle_rotation/bottle_splash/5_bottle_splash.png',
-        'img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png',
-        'img/6_salsa_bottle/bottle_rotation/bottle_splash/1_bottle_splash.png',
-        'img/6_salsa_bottle/bottle_rotation/bottle_splash/2_bottle_splash.png',
-        'img/6_salsa_bottle/bottle_rotation/bottle_splash/3_bottle_splash.png',
-        'img/6_salsa_bottle/bottle_rotation/bottle_splash/4_bottle_splash.png',
-        'img/6_salsa_bottle/bottle_rotation/bottle_splash/5_bottle_splash.png',
-        'img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png',
-    ];
+  constructor(x, y, speedX, speedY, BottleImg) {
+    super().loadImage(this.IMAGES_FLYINGBOTTLE[0]);
+    this.loadImages(this.IMAGES_FLYINGBOTTLE);
+    this.loadImages(this.IMAGES_SPLASH);
 
-    constructor(x,y, speedX, speedY,BottleImg ){
-        super().loadImage(this.IMAGES_FLYINGBOTTLE[0])
-        this.loadImages(this.IMAGES_FLYINGBOTTLE);
-        this.loadImages(this.IMAGES_SPLASH);
-
-        this.x = x;
-        this.y = y;
-        if(BottleImg != undefined){
-            this.trow(speedX,speedY,BottleImg);
-        }
+    this.x = x;
+    this.y = y;
+    if (BottleImg != undefined) {
+      this.trow(speedX, speedY, BottleImg);
     }
+  }
 
-    /**
-     * hier werden die Flaschen geworfen
-     * @param {integer} speedX 
-     * @param {integer} speedY 
-     * @param {array} BottleImg 
-     */
-    trow(speedX, speedY, BottleImg){
-        this.speedY = speedY;
-        this.applyGravity();
-        setInterval(() => {
-            this.x += speedX;
-            this.playAnimation(BottleImg);
-        },50)
-    }
-
+  /**
+   * Handles the throw of the bottle, applying gravity, and animating its movement and rotation.
+   * @param {integer} speedX - Horizontal speed of the bottle.
+   * @param {integer} speedY - Initial vertical speed of the bottle.
+   * @param {array} BottleImg - Images to use for the bottle's animation during the throw.
+   */
+  trow(speedX, speedY, BottleImg) {
+    this.speedY = speedY;
+    this.applyGravity();
+    setInterval(() => {
+      this.x += speedX;
+      this.playAnimation(BottleImg);
+    }, 50);
+  }
 }

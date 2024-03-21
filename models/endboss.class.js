@@ -14,14 +14,14 @@ class Endboss extends MovableObject {
   };
   playEndSound = true;
   soundsAreNew = true;
-
+  // Array of image paths for walking animation
   IMAGES_WALKING = [
     "img/4_enemie_boss_chicken/1_walk/G1.png",
     "img/4_enemie_boss_chicken/1_walk/G2.png",
     "img/4_enemie_boss_chicken/1_walk/G3.png",
     "img/4_enemie_boss_chicken/1_walk/G4.png",
   ];
-
+  // Array of image paths for alert animation
   IMAGES_ALERT = [
     "img/4_enemie_boss_chicken/2_alert/G5.png",
     "img/4_enemie_boss_chicken/2_alert/G6.png",
@@ -32,7 +32,7 @@ class Endboss extends MovableObject {
     "img/4_enemie_boss_chicken/2_alert/G11.png",
     "img/4_enemie_boss_chicken/2_alert/G12.png",
   ];
-
+  // Array of image paths for attack animation
   IMAGES_ATTACK = [
     "img/4_enemie_boss_chicken/3_attack/G13.png",
     "img/4_enemie_boss_chicken/3_attack/G14.png",
@@ -47,19 +47,21 @@ class Endboss extends MovableObject {
     "img/4_enemie_boss_chicken/1_walk/G3.png",
     "img/4_enemie_boss_chicken/1_walk/G4.png",
   ];
-
+  // Array of image paths for hurt animation
   IMAGES_HURT = [
     "img/4_enemie_boss_chicken/4_hurt/G21.png",
     "img/4_enemie_boss_chicken/4_hurt/G22.png",
     "img/4_enemie_boss_chicken/4_hurt/G23.png",
   ];
-
+  // Array of image paths for dead animation
   IMAGES_DEAD = [
     "img/4_enemie_boss_chicken/5_dead/G24.png",
     "img/4_enemie_boss_chicken/5_dead/G25.png",
     "img/4_enemie_boss_chicken/5_dead/G26.png",
   ];
-
+  /**
+   * Initializes the endboss with default properties, loads images, and starts animation.
+   */
   constructor() {
     super().loadImage(this.IMAGES_ALERT[0]);
     this.loadImages(this.IMAGES_ATTACK);
@@ -72,25 +74,29 @@ class Endboss extends MovableObject {
   }
 
   /**
-   * Ruft die Intervalle für den Endboss auf
+   * Sets up intervals for endboss movements and animations.
    */
   animate() {
     setStopableInterval(this.endbossMoves, 10);
     setStopableInterval(this.animateEndboss, 200);
   }
-
+  /**
+   * Controls the animation sequence of the endboss based on its state.
+   */
   animateEndboss = () => {
     this.playEndbossAnimation();
     this.endbossIsDead();
   };
 
   /**
-   * Moves the Endboss
+   * Manages the movement logic for the endboss.
    */
   endbossMoves = () => {
     this.moveleft();
   };
-
+  /**
+   * Plays the appropriate animation for the endboss based on its current state.
+   */
   playEndbossAnimation() {
     if (this.isHurt()) {
       this.playAnimation(this.IMAGES_HURT);
@@ -108,7 +114,7 @@ class Endboss extends MovableObject {
       this.playAnimation(this.IMAGES_ALERT);
     }
   }
-
+  // Implementation remains unchanged
   endbossIsDead() {
     if (this.isDead()) {
       if (this.playEndSound) {
@@ -119,7 +125,7 @@ class Endboss extends MovableObject {
       this.playEndSound = false;
     }
   }
-
+  // Implementation remains unchanged
   playBossSounds() {
     if (this.soundsAreNew) {
       sounds.push(this.hurtedEndboss_sound);

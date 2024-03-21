@@ -109,17 +109,13 @@ class World {
     }
   }
 
-  /**
-   * Überprüft, ob der Endboss angreifen muss
-   */
+  // Checks if the endboss is attacking
   checkForEndbossAttack() {
     this.space =
       this.level.enemies[this.level.enemies.length - 1].x - this.character.x;
   }
 
-  /**
-   * Überprüft, ob die Flasche einen Feind trifft
-   */
+  // Checks if the bottle has hit an enemy
   checkBottleHit = () => {
     if (this.gamestart) {
       this.level.enemies.forEach((enemy) => {
@@ -133,9 +129,7 @@ class World {
     }
   };
 
-  /**
-   * Überprüft, ob der Charakter tot ist
-   */
+  // Checks if the character is dead
   checkDeadOfCharacter() {
     if (this.character.isDead() && !this.gameEnded) {
       this.characterDied = true;
@@ -145,33 +139,33 @@ class World {
         this.character.playAnimation(this.character.IMAGES_DEATH);
       }
 
-      // Verzögerung vor dem Anzeigen des "You Lost"-Overlays
+      // If the character is dead, show the "You Lost" overlay after 2 seconds
       setTimeout(() => {
-        this.showYouLostOverlay(); // Aufruf der Methode, die das "You Lost"-Overlay anzeigt
-      }, 2000); // 2 Sekunden Verzögerung
+        this.showYouLostOverlay(); // Show the "You Lost" overlay after 2 seconds
+      }, 2000); // 2000ms = 2 seconds
     }
   }
 
   showYouLostOverlay() {
-    // Overlay-Erstellung und Anzeige, wie bereits definiert
+    // Create the overlay with the "You Lost" message and a "Retry" button
     const overlay = document.createElement("div");
     overlay.className = "overlay";
     const image = new Image();
     image.src = "img/9_intro_outro_screens/game_over/you lost.png";
     image.className = "overlay-image";
-
+    // Create a button to reload the page
     const button = document.createElement("button");
     button.innerText = "Nochmal versuchen";
     button.className = "retry-button";
     button.addEventListener("click", function () {
       location.reload();
     });
-
+    // Add the image and button to the overlay
     overlay.appendChild(image);
     overlay.appendChild(button);
     document.body.appendChild(overlay);
   }
-
+  // Checks if the character is behind the endboss
   checkIfCharacterIsBehindBoss() {
     if (
       this.character.x > this.level.enemies[this.level.enemies.length - 1].x
@@ -184,18 +178,13 @@ class World {
     }
   }
 
-  /**
-   * Überprüft, ob der Endboss tot ist
-   */
+  // Checks if the endboss is dead
   checkDeadOfEndboss() {
     if (
       this.level.enemies[this.level.enemies.length - 1].isDead() &&
       !this.endbossDied
     ) {
       this.endbossDied = true;
-
-      // Here would stand your logic to start the end boss death animation
-      // After the animation has started (or finished):
 
       setTimeout(() => {
         showEndBossDefeatedOverlay();
@@ -417,20 +406,14 @@ class World {
     endScreenImg.src = "img/9_intro_outro_screens/game_over/winner.jpg";
   }
 
-  /**
-   * Fügt Objekte zur Karte hinzu
-   * @param {object} objects
-   */
+  // Adds objects to the map
   addObjectsToMap(objects) {
     objects.forEach((o) => {
       this.addToMap(o);
     });
   }
 
-  /**
-   * Fügt ein einzelnes Objekt zur Karte hinzu
-   * @param {object} mo
-   */
+  // Adds an object to the map
   addToMap(mo) {
     if (mo.otherDirection) {
       this.flipImage(mo);
@@ -443,10 +426,7 @@ class World {
     }
   }
 
-  /**
-   * Kippt/Dreht das Bild unter den richtigen Bedingungen
-   * @param {object} mo
-   */
+  // Flips the image
   flipImage(mo) {
     this.ctx.save();
     this.ctx.translate(mo.width, 0);
@@ -454,10 +434,7 @@ class World {
     mo.x = mo.x * -1;
   }
 
-  /**
-   * Setzt die Umkehrung des Bildes zurück
-   * @param {object} mo
-   */
+  // Flips the image back
   flipImageBack(mo) {
     mo.x = mo.x * -1;
     this.ctx.restore();

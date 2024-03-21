@@ -11,7 +11,7 @@ let i = 1;
 let soundsAreNew = true;
 
 /**
- * Loads the page.
+ * Initializes the game environment. This function gets called to prepare the game canvas and instantiate the game world.
  */
 function init() {
   canvas = document.getElementById("canvas");
@@ -19,7 +19,7 @@ function init() {
 }
 
 /**
- * Starts the game on click.
+ * Handles the actions to be taken to start the game. This includes game initialization, hiding the start button, and playing the game background music.
  */
 function startTheGame() {
   gameStart();
@@ -31,38 +31,36 @@ function startTheGame() {
   game_song.play();
 }
 
+/**
+ * Displays an overlay when the end boss is defeated. This includes a victory image and a button to retry or restart the game.
+ */
 function showEndBossDefeatedOverlay() {
   const overlay = document.createElement("div");
-  overlay.className = "overlay"; // Assigns the CSS class to the overlay.
+  overlay.className = "overlay";
 
   const image = new Image();
-  image.src = "img/9_intro_outro_screens/game_over/winner.jpg"; // Path to your overlay image.
-  image.className = "overlay-image"; // Assigns the CSS class to the image.
+  image.src = "img/9_intro_outro_screens/game_over/winner.jpg";
+  image.className = "overlay-image";
 
-  // Create button.
   const button = document.createElement("button");
-  button.innerText = "Try again";
-  button.className = "retry-button"; // Ensure you have styles for this class in your CSS.
+  button.innerText = "Nochmal versuchen";
+  button.className = "retry-button";
   button.style.position = "absolute";
   button.style.left = "50%";
-  button.style.transform = "translateX(-50%)"; // Centers the button horizontally.
-  button.style.bottom = "20px"; // Distance from the bottom of the overlay.
+  button.style.transform = "translateX(-50%)";
+  button.style.bottom = "20px";
 
-  // Event listener for the button.
   button.addEventListener("click", function () {
-    location.reload(); // Reloads the page.
+    location.reload();
   });
 
   overlay.appendChild(image);
-  overlay.appendChild(button); // Adds the button to the overlay.
+  overlay.appendChild(button);
   document.body.appendChild(overlay);
-
-  // The event listener for clicking on the overlay to remove it was removed.
-  // The overlay remains until the button is clicked.
 }
 
 /**
- * Pushes the current sound into the sounds array.
+ * pushs the current sound into the sounds Array
  */
 function pushGameSoundInArray() {
   if (soundsAreNew) {
@@ -72,7 +70,7 @@ function pushGameSoundInArray() {
 }
 
 /**
- * Sets the correct booleans for game start.
+ * is setting the right booleans for gamestart
  */
 function gameStart() {
   world.gamestart = true;
@@ -81,7 +79,7 @@ function gameStart() {
 }
 
 /**
- * Hides the start button.
+ * hides the start button
  */
 function hideButton() {
   document.getElementById("startBtn").style = "display: none;";
@@ -94,28 +92,32 @@ function hideIconFullscreen() {
 }
 
 /**
- * Steers the sound for the game.
+ * steers the sound for the game
  */
 function steerSound() {
   if (soundIsRunning) {
+    //game_song.pause();
     sounds.forEach((sound) => {
       sound.muted = true;
     });
     soundIsRunning = false;
-    document.getElementById("soundON").src = "img/9_intro_outro_screens/soundOFF.png";
+    document.getElementById("soundON").src =
+      "img/9_intro_outro_screens/soundOFF.png";
   } else {
+    //game_song.play();
     sounds.forEach((sound) => {
       sound.muted = false;
     });
     soundIsRunning = true;
-    document.getElementById("soundON").src = "img/9_intro_outro_screens/soundOn.png";
+    document.getElementById("soundON").src =
+      "img/9_intro_outro_screens/soundOn.png";
   }
 }
 
 /**
- * Sets an interval for a function and pushes the interval's ID into the "intervalIds" array.
- * @param {Function} fn - The function to be executed.
- * @param {Number} time - The interval time in milliseconds.
+ * sets intervall for current function and pushs the id from it into the array "intervalIds"
+ * @param {function} fn
+ * @param {Integer} time
  */
 function setStopableInterval(fn, time) {
   let id = setInterval(fn, time);
@@ -123,7 +125,7 @@ function setStopableInterval(fn, time) {
 }
 
 /**
- * Stops the game by clearing all intervals in the "intervalIds" array.
+ * stops the game by clearing all intervalls from the array "intervalIds"
  */
 function stopGame() {
   if (!world.gameEnded) {
@@ -133,7 +135,7 @@ function stopGame() {
 }
 
 /**
- * If the game is stopped, this function starts a new match.
+ * if the game is stopped, this function starts a new match
  */
 function restartTheGame() {
   gameStart();
@@ -143,22 +145,10 @@ function restartTheGame() {
 }
 
 /**
- * Shows the button for starting a new match.
+ * shows the button for starting an new match
  */
 function showRestartBtn() {
   document.getElementById("restartBtn").style = "display: flex;";
-}
-
-function exitFullscreen() {
-  if (document.exitFullscreen) {
-    document.exitFullscreen();
-  } else if (document.msExitFullscreen) {
-    // IE11
-    document.msExitFullscreen();
-  } else if (document.webkitExitFullscreen) {
-    // Safari
-    document.webkitExitFullscreen();
-  }
 }
 
 /**
@@ -200,6 +190,8 @@ function enterFullscreen(element) {
   fullscreen = true;
 }
 
+// Registers a listener for key down events to control movement and actions in the game.
+
 window.addEventListener("keydown", (e) => {
   if (e.keyCode == 39 && !world.gameEnded) {
     keyboard.RIGHT = true;
@@ -225,6 +217,7 @@ window.addEventListener("keydown", (e) => {
   }
 });
 
+// Registers a listener for key up events to stop movement and actions in the game.
 window.addEventListener("keyup", (e) => {
   if (e.keyCode == 39) {
     keyboard.RIGHT = false;

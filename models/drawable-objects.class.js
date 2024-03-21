@@ -8,16 +8,14 @@ class DrawableObject {
   currentImage = 0;
 
   /**
-   * draws the current image
-   * @param {object} ctx
+   * Draws the current image of the object on the canvas.
    */
   draw(ctx) {
     ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
   }
 
   /**
-   * Draws a frame at the objects
-   * @param {Object} ctx
+   * Optionally draws a frame around the object for debugging purposes.
    */
   drawFrame(ctx) {
     if (
@@ -36,8 +34,7 @@ class DrawableObject {
   }
 
   /**
-   * gets the src for the image
-   * @param {string} path
+   * Loads a single image from a given path.
    */
   loadImage(path) {
     this.img = new Image();
@@ -45,8 +42,7 @@ class DrawableObject {
   }
 
   /**
-   * is loading the images for the accorldingly array
-   * @param {array} arr
+   * Preloads a set of images given an array of paths and stores them in an image cache.
    */
   loadImages(arr) {
     arr.forEach((path) => {
@@ -57,8 +53,7 @@ class DrawableObject {
   }
 
   /**
-   * gets the current progress for the status bar and shows the right picture
-   * @param {integer} percentage
+   * Sets the current image based on the object's percentage value, useful for status bars or loading screens.
    */
   setPercentage(percentage) {
     this.percentage = percentage;
@@ -67,8 +62,7 @@ class DrawableObject {
   }
 
   /**
-   *
-   * @returns the right value for getting the right index from the img array
+   * Determines the correct image index to use based on the object's percentage value.
    */
   resolveImageIndex() {
     if (this.percentage >= 100 || this.percentage >= 81) {
